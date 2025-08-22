@@ -1,9 +1,15 @@
-import express from "express";
-import { createUser } from "../controllers/userController.js";
-
+const express = require('express');
 const router = express.Router();
 
-// Correct route path
-router.post("/admin/create-users", createUser);
+const { deleteFile } = require('./Controllers/executive/deleteFile');
+const { createFile } = require('./Controllers/executive/createFile');
+const { updateFile } = require('./Controllers/executive/updateFile');
+const { showFile } = require('./Controllers/executive/showFile');
 
-export default router;
+// Routes
+router.post('/executive/create-file', createFile);
+router.put('/executive/update-file', updateFile);
+router.delete('/executive/delete-file', deleteFile);
+router.get('/executive/show-file', showFile);
+
+module.exports = router;
