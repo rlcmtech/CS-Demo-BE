@@ -1,5 +1,5 @@
 // Controllers/createUser.js
-import User from "../models/User.js"; // adjust path if needed
+import User from "../../models/User.js"; // adjust path if needed
 
 export const createUser = async (req, res) => {
   try {

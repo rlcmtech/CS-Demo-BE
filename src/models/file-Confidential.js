@@ -11,12 +11,16 @@ const fileSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
-    access: {
-      type: String,
-      enum: ['unclassified', 'secret', 'topsecret'],
-      default: 'unclassified',
+    confidential: {
+      type: Boolean,
+      default: true,
       required: true,
     },
+    visibleTo: [
+      {
+        type: String, // store usernames of people allowed to view
+      },
+    ],
   },
   { timestamps: true } // adds createdAt & updatedAt automatically
 );
@@ -24,3 +28,5 @@ const fileSchema = new mongoose.Schema(
 const File = mongoose.model('File', fileSchema);
 
 module.exports = File;
+
+
