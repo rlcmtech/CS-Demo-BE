@@ -16,9 +16,13 @@ const fileSchema = new mongoose.Schema(
       default: true,
       required: true,
     },
+    createdBy: {
+      type: String, // username of the creator
+      required: true,
+    },
     visibleTo: [
       {
-        type: String, // store usernames of people allowed to view
+        type: String, // other usernames allowed to view
       },
     ],
   },
@@ -28,5 +32,3 @@ const fileSchema = new mongoose.Schema(
 const File = mongoose.model('File', fileSchema);
 
 module.exports = File;
-
-

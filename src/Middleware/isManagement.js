@@ -1,10 +1,9 @@
-// config/roles.js
+// middleware/isManagement.js
+const isManagement = (req, res, next) => {
+  if (req.user.role !== "management") {
+    return res.status(403).json({ message: "Management access only" });
+  }
+  next();
+};
 
-const roles = Object.freeze({
-  production: 'production',
-  management: 'management',
-  admin: 'admin',
-  executive: 'executive'
-});
-
-module.exports = roles;
+module.exports = isManagement;

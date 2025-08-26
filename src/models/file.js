@@ -17,6 +17,10 @@ const fileSchema = new mongoose.Schema(
       default: 'unclassified',
       required: true,
     },
+    createdBy: {
+      type: String, // username of the creator
+      required: true,
+    },
   },
   { timestamps: true } // adds createdAt & updatedAt automatically
 );

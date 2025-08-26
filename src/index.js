@@ -4,6 +4,8 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const router = require('./router'); // Your router.js file
+const cors = require('cors');
+const cookieParser = require('cookie-parser'); // ✅ import cookie-parser
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -11,9 +13,14 @@ const PORT = process.env.PORT || 3000;
 // Middleware to parse JSON
 app.use(express.json());
 
+// ✅ Cookie parser middleware (must come before routes)
+app.use(cookieParser());
+
 // Optional: enable CORS if calling from frontend
-const cors = require('cors');
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:5173", // your frontend URL
+  credentials: true // ✅ allow cookies to be sent
+}));
 
 // Mount main router
 app.use('/', router);
