@@ -16,7 +16,7 @@
   "name": "Luis",
   "middlename": "C",
   "lastname": "Exec",
-  "username": "luisadmin",
+  "username": "luisexec",
   "password": "QwertyPass123",
   "email": "execluis@example.com",
   "role": "executive",

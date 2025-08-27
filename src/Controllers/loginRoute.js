@@ -1,22 +1,19 @@
-// Controllers/login.js
-const express = require("express");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const User = require("../models/user");
-const router = express.Router();
+// Controllers/loginRoute.js
+const User = require('../models/user');
+const jwt = require('jsonwebtoken');
 
-router.post("/", async (req, res) => {   // 👈 change from "/login" → "/"
+module.exports = async function (req, res) {
   try {
     const { username, password } = req.body;
 
     const user = await User.findOne({ username });
     if (!user) return res.status(400).json({ message: "Invalid credentials" });
 
-    const isMatch = await bcrypt.compare(password, user.password);
+    const isMatch = await user.comparePassword(password);
     if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
 
     const token = jwt.sign(
-      { id: user._id, role: user.role, access: user.access },
+      { id: user._id, username: user.username, role: user.role, access: user.access },
       process.env.JWT_SECRET,
       { expiresIn: "4h" }
     );
@@ -28,18 +25,19 @@ router.post("/", async (req, res) => {   // 👈 change from "/login" → "/"
     });
 
     res.json({
-  message: "Login successful",
-  token, // <-- include token here
-  user: {
-    id: user._id,
-    username: user.username,
-    role: user.role,
-    access: user.access,
-  },
-});
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-});
+      message: "Login successful",
+      token,
+      user: {
+        id: user._id,
+        username: user.username,
+        role: user.role,
+        access: user.access,
+        status: user.status,
+      },
+    });
 
-module.exports = router;
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+};

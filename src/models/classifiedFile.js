@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const fileSchema = new mongoose.Schema(
+const ClassifiedFileSchema = new mongoose.Schema(
   {
     filename: {
       type: String,
@@ -25,6 +25,6 @@ const fileSchema = new mongoose.Schema(
   { timestamps: true } // adds createdAt & updatedAt automatically
 );
 
-const File = mongoose.model('File', fileSchema);
+const ClassifiedFile = mongoose.model('ClassifiedFile', ClassifiedFileSchema);
 
-module.exports = File;
+module.exports = ClassifiedFile;

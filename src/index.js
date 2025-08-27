@@ -1,34 +1,30 @@
-// Load environment variables
 require('dotenv').config();
-
 const express = require('express');
 const mongoose = require('mongoose');
-const router = require('./router'); // Your router.js file
 const cors = require('cors');
-const cookieParser = require('cookie-parser'); // ✅ import cookie-parser
+const cookieParser = require('cookie-parser');
+
+const router = require('./router'); // other routes
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware to parse JSON
+// Middleware
 app.use(express.json());
-
-// ✅ Cookie parser middleware (must come before routes)
 app.use(cookieParser());
-
-// Optional: enable CORS if calling from frontend
 app.use(cors({
-  origin: "http://localhost:5173", // your frontend URL
-  credentials: true // ✅ allow cookies to be sent
+  origin: "http://localhost:5173",
+  credentials: true
 }));
 
-// Mount main router
+
+
+
+// Other routes
 app.use('/', router);
 
 // Test route
-app.get('/', (req, res) => {
-  res.send('Hello Backend!');
-});
+app.get('/', (req, res) => res.send('Hello Backend!'));
 
 // MongoDB connection
 mongoose.connect(process.env.MDB_URI)
@@ -36,6 +32,4 @@ mongoose.connect(process.env.MDB_URI)
   .catch((err) => console.error('MongoDB connection error:', err));
 
 // Start server
-app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
-});
+app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));
