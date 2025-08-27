@@ -17,6 +17,11 @@ const taskSchema = new mongoose.Schema(
       default: 'pending',
       required: true,
     },
+    progress_report: {
+      type: String,
+      default: "Add progress report",
+      required: true,
+    },
     status: {
       type: String,
       enum: ['approved', 'needs revision'],

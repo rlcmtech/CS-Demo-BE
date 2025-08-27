@@ -11,6 +11,18 @@
 },
 
 
+{
+  "name": "Luis",
+  "middlename": "C",
+  "lastname": "manager",
+  "username": "luismanager",
+  "password": "QwertyPass123",
+  "email": "execluis@example.com",
+  "role": "manager",
+  "access": "secret"
+}
+
+
 
 {
   "name": "Luis",
@@ -28,6 +40,18 @@
   "username": "luisadmin",
   "password": "QwertyPass123"
 }
+
+
+
+{
+  "title": "Develop Dashboard",
+  "details": "Create initial dashboard layout for the admin panel",
+  "progress": "pending",
+  "progress_report": "Initial task created",
+  "status": "needs revision",
+  "comment": "Will add charts after review"
+}
+
 
 
 curl http://localhost:3000/

@@ -72,7 +72,7 @@ router.post('/admin/update-user', isLoggedin, UpdateUser);
 router.use('/admin/show-users', ShowUsers);
 
 // management routes
-router.use('/management-create-task', CreateTask);
+router.use('/management-create-task', isLoggedin, isManagement, CreateTask);
 router.use('/management-approve-task', ApproveTask);
 
 // production route
