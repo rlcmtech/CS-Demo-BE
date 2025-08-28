@@ -44,13 +44,15 @@
 
 
 {
-  "title": "Develop Dashboard",
-  "details": "Create initial dashboard layout for the admin panel",
+  "title": "Server Maintenance",
+  "details": "Update server software and check logs",
   "progress": "pending",
   "progress_report": "Initial task created",
   "status": "needs revision",
-  "comment": "Will add charts after review"
+  "comment": "High priority",
+  "visibleTo": ["luisproduction"]
 }
+
 
 
 

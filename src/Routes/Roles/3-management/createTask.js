@@ -2,7 +2,7 @@ const Task = require('../../../models/task');
 
 const CreateTask = async (req, res) => {
   try {
-    const { title, details, progress, progress_report, status, comment } = req.body;
+    const { title, details, progress, progress_report, status, comment, visibleTo } = req.body;
 
     // Validate enum fields
     if (progress && !['pending', 'ongoing', 'finished'].includes(progress)) {
@@ -15,6 +15,9 @@ const CreateTask = async (req, res) => {
     // Use username from decoded token
     const createdBy = req.user.username;
 
+    // Ensure visibleTo is an array of usernames if provided
+    const visibleUsers = Array.isArray(visibleTo) ? visibleTo : [];
+
     const newTask = new Task({
       title,
       details,
@@ -22,7 +25,8 @@ const CreateTask = async (req, res) => {
       progress_report,
       status,
       comment,
-      createdBy
+      createdBy,
+      visibleTo: visibleUsers // assign production users who can see this task
     });
 
     await newTask.save();
@@ -38,6 +42,7 @@ const CreateTask = async (req, res) => {
         status: newTask.status,
         comment: newTask.comment,
         createdBy: newTask.createdBy,
+        visibleTo: newTask.visibleTo,
         createdAt: newTask.createdAt
       }
     });
