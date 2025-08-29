@@ -54,6 +54,22 @@
 }
 
 
+/// classified file template:
+{
+  "filename": "Top Secret Plan",
+  "details": "Only for executives",
+  "access": "topsecret"
+}
+
+/// confidential file template: 
+{
+  "filename": "Confidential Report",
+  "details": "Contains sensitive company data",
+  "confidential": true,
+  "visibleTo": ["user1", "user2"]
+}
+
+
 
 
 curl http://localhost:3000/

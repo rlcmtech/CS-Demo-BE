@@ -13,16 +13,16 @@ const isProduction = require('./Middleware/isProduction.js');
 // controllers
 const loginRoute = require('./Controllers/loginRoute')
 //// RBAC
-// exec import - confidential
-const createConfidentialFile = require('./Routes/Roles/1-Executive/Confidential File/createConfidential.js')
-const DeleteConfidential = require('./Routes/Roles/1-Executive/Confidential File/deleteConfidential.js')
-const ShowConfidential = require('./Routes/Roles/1-Executive/Confidential File/showConfidential.js')
-const UpdateConfidential = require('./Routes/Roles/1-Executive/Confidential File/updateConfidential.js')
 // exec imports - classified
 const createClassifiedFile = require('./Routes/Roles/1-Executive/Classified File/createClassified.js');
 const UpdateClassified = require('./Routes/Roles/1-Executive/Classified File/updateClassified.js');
 const DeleteClassified = require('./Routes/Roles/1-Executive/Classified File/deleteClassified.js');
 const ShowClassified = require('./Routes/Roles/1-Executive/Classified File/showClassified.js');
+// exec import - confidential
+const createConfidentialFile = require('./Routes/Roles/1-Executive/Confidential File/createConfidential.js')
+const DeleteConfidential = require('./Routes/Roles/1-Executive/Confidential File/deleteConfidential.js')
+const ShowConfidential = require('./Routes/Roles/1-Executive/Confidential File/showConfidential.js')
+const UpdateConfidential = require('./Routes/Roles/1-Executive/Confidential File/updateConfidential.js')
 // admin imports
 const CreateUser = require('./Routes/Roles/2-admin/createUser.js');
 const UpdateUser = require('./Routes/Roles/2-admin/updateUser.js');
@@ -41,23 +41,24 @@ const ViewConfidentialFiles = require('../src/Routes/Files/confidentialfile.js')
 // controller routes
 router.post('/login', loginRoute ); // this is login
 // executive routes
-router.use('/executive/create-confidential-file', isLoggedin, isExecutive, createConfidentialFile);
-router.use('/executive/delete-confidential-file', DeleteConfidential);
-router.use('/executive/show-confidential-files', ShowConfidential);
-router.use('/executive/update-confidential-file', UpdateConfidential);
 router.use('/executive/create-classified-file', isLoggedin, isExecutive, createClassifiedFile);
-router.use('/executive/update-classified-file', UpdateClassified);
-router.use('/executive/delete-classified-file', DeleteClassified);
+router.put('/executive/update-classified-file/:id', isLoggedin, isExecutive, UpdateClassified);
+router.use('/executive/delete-classified-file/:id', DeleteClassified);
 router.get('/executive/show-classified-files', ShowClassified);
+router.use('/executive/create-confidential-file', isLoggedin, isExecutive, createConfidentialFile);
+router.use('/executive/delete-confidential-file/:id', DeleteConfidential);
+router.use('/executive/show-confidential-files', ShowConfidential);
+router.use('/executive/update-confidential-file/:id', UpdateConfidential);
+
 // admin
 router.post('/admin/create-user', isLoggedin, isAdmin, CreateUser); 
-router.post('/admin/update-user', isLoggedin, UpdateUser);
+router.post('/admin/update-user/:id', isLoggedin, UpdateUser);
 router.use('/admin/show-users', isLoggedin, ShowUsers);
 // management routes
 router.use('/management-create-task', isLoggedin, isManagement, CreateTask);
-router.use('/management-approve-task', ApproveTask);
+router.use('/management-approve-task/:id', ApproveTask);
 // production route
-router.use('/production-update-task', isLoggedin, isProduction, UpdateTask);
+router.use('/production-update-task/:id', isLoggedin, isProduction, UpdateTask);
 router.use('/production-view-tasks', isLoggedin, ViewTasks);
 // Files Access
 router.use('/user/view/classified-files', isLoggedin, ViewClassifiedFiles );
