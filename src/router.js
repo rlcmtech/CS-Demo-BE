@@ -9,8 +9,6 @@ const isAdmin = require('./Middleware/isAdmin.js');
 const isManagement = require('./Middleware/isManagement.js');
 const isProduction = require('./Middleware/isProduction.js');
 
-
-
 //// imports 
 // controllers
 const loginRoute = require('./Controllers/loginRoute')
@@ -54,7 +52,7 @@ router.get('/executive/show-classified-files', ShowClassified);
 // admin
 router.post('/admin/create-user', isLoggedin, isAdmin, CreateUser); 
 router.post('/admin/update-user', isLoggedin, UpdateUser);
-router.use('/admin/show-users', ShowUsers);
+router.use('/admin/show-users', isLoggedin, ShowUsers);
 // management routes
 router.use('/management-create-task', isLoggedin, isManagement, CreateTask);
 router.use('/management-approve-task', ApproveTask);
