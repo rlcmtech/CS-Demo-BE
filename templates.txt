@@ -75,6 +75,10 @@
   "visibleTo": ["user1", "user2"]
 }
 
+{
+  "username": "userprod",
+  "password": "newpassword123"
+}
 
 
 

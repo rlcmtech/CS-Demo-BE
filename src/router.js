@@ -13,7 +13,8 @@ const isProduction = require('./Middleware/isProduction.js');
 // controllers
 const loginRoute = require('./Controllers/loginRoute');
 const logoutRoute = require('./Controllers/logoutRoute.js');
-const resetPassword = require('./')
+const generatePasswordResetLink = require('./Controllers/GenerateResetPasswordLink');
+const resetPassword = require('./Controllers/ResetPassword.js');
 //user login, logoute, and reset password route
 
 
@@ -52,6 +53,8 @@ const ViewConfidentialFiles = require('./Routes/Files/confidentialfiles.js');
 
 // controller routes
 router.post('/login', loginRoute); // this is login
+router.post('/:id/generate-reset-password-link', isLoggedin, isAdmin, generatePasswordResetLink )
+router.post('/reset-password/:token', resetPassword)
 // executive routes
 router.use('/executive/create-classified-file', isLoggedin, isExecutive, createClassifiedFile);
 router.put('/executive/update-classified-file/:id', isLoggedin, isExecutive, UpdateClassified);
